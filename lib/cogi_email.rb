@@ -1,3 +1,4 @@
+require 'cogi_email/checker'
 require 'cogi_email/error'
 require 'cogi_email/version'
 require 'mail'
@@ -77,5 +78,34 @@ module CogiEmail
     end
 
     valid
+  end
+
+  # Check if an email address is real or not.
+  #
+  # An email address is real if:
+  #   Valid
+  #   Has MX DNS record
+  #   Can send test email
+  #
+  # @param [String] email Email address
+  #
+  # @return [Boolean] True if email address is real, otherwise False
+  #
+  # @example
+  #   CogiEmail.real_email?('nobi.younet@gmail.com')   # => true
+  #   CogiEmail.real_email?('nobi.younet@example.com') # => false
+  def self.real_email?(email)
+    return false unless self.validate?(email) # not a valid email address
+    result = true
+
+    begin
+      v = CogiEmail::Checker.new(email)
+      v.connect
+      v.verify
+    rescue
+      result = false
+    end
+
+    result
   end
 end

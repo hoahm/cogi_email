@@ -124,4 +124,18 @@ describe CogiEmail do
       end
     end
   end
+
+  describe '#real_email?' do
+    context 'real email' do
+      it 'return true' do
+        expect(CogiEmail.real_email?('nobi.younet@gmail.com')).to be_truthy
+      end
+    end
+
+    context 'fake email' do
+      it 'return false' do
+        expect(CogiEmail.real_email?('nobi.younet@example.com')).to be_falsey
+      end
+    end
+  end
 end
