@@ -106,4 +106,22 @@ describe CogiEmail do
       end
     end
   end
+
+  describe '#valid_email_domain?' do
+    context 'Wellknown email providers' do
+      %w(gmail.com hotmail.com outlook.com yahoo.com aol.com).each do |domain|
+        it "peter.brown@#{domain} is valid" do
+          expect(CogiEmail.valid_email_domain?("peter.brown@#{domain}")).to be_truthy
+        end
+      end
+    end
+
+    context 'Email domain do not have MX record' do
+      %w(example.com aabbbccddee.example localhost).each do |domain|
+        it "peter.brown@#{domain} is not valid" do
+          expect(CogiEmail.valid_email_domain?("peter.brown@#{domain}")).to be_falsey
+        end
+      end
+    end
+  end
 end

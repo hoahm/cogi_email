@@ -1,6 +1,7 @@
 require 'cogi_email/error'
 require 'cogi_email/version'
 require 'mail'
+require 'resolv'
 
 module CogiEmail
   def self.hi
@@ -53,5 +54,28 @@ module CogiEmail
     rescue
       raise CogiEmail::NormalizationError
     end
+  end
+
+  # Check if email domain is valid by making a DNS lookup.
+  #
+  # An email domain is valid if it has an MX DNS record is set up to receive mail.
+  #
+  # Reference: https://www.safaribooksonline.com/library/view/ruby-cookbook/0596523696/ch01s19.html
+  #
+  # @param [String] email Email address
+  #
+  # @return [Boolean] True if email domain have valid MX DNS record, otherwise False
+  def self.valid_email_domain?(email)
+    valid = true
+
+    begin
+      m = Mail::Address.new(email)
+      hostname = m.domain
+      Resolv::DNS.new.getresource(hostname, Resolv::DNS::Resource::IN::MX)
+    rescue Resolv::ResolvError
+      valid = false
+    end
+
+    valid
   end
 end
