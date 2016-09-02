@@ -1,4 +1,6 @@
+require 'cogi_email/error'
 require 'cogi_email/version'
+require 'mail'
 
 module CogiEmail
   def self.hi
@@ -27,5 +29,29 @@ module CogiEmail
   def self.validate?(email)
     pattern = /\A\s*([-\p{L}\d+._]{1,64})@((?:[-\p{L}\d]+\.)+\p{L}{2,})\s*\z/i
     !!(email =~ pattern)
+  end
+
+  # Normalize email address.
+  #
+  # You need to validate before normalize an email address.
+  #
+  # @param [String] email Email address
+  #
+  # @return [String] Email address in lowercase, without special characters.
+  #
+  # @raise [CogiEmail::NormalizationError] If can not normalize the email address.
+  #
+  # @example
+  #   CogiEmail.normalize('(Peter Brown)<peter_brown@example.com>') # => peter_brown@example.com
+  #   CogiEmail.normalize('peter_brown@example.com') # => peter_brown@example.com
+  #   CogiEmail.normalize('Peter_Brown@example.com') # => peter_brown@example.com
+  #   CogiEmail.normalize('peter brown@example.com') # => peter_brown@example.com
+  def self.normalize(email)
+    begin
+      m = Mail::Address.new(email)
+      m.address.downcase
+    rescue
+      raise CogiEmail::NormalizationError
+    end
   end
 end
