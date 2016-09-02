@@ -5,10 +5,6 @@ require 'mail'
 require 'resolv'
 
 module CogiEmail
-  def self.hi
-    puts "Hello from Cogi::Email"
-  end
-
   # Check if a string is a valid email address.
   #
   # This library is so strict to ensure that all email is clean and deliverable.

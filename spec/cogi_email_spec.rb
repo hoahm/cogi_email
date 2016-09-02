@@ -3,12 +3,6 @@ require 'spec_helper'
 describe CogiEmail do
   subject { CogiEmail.new }
 
-  describe '#hi' do
-    it 'return nil' do
-      expect(CogiEmail.hi).to eq(nil)
-    end
-  end
-
   VALID_EMAIL_ADDRESSES = [
     "a+b@plus-in-local.com",
     "a_b@underscore-in-local.com",
