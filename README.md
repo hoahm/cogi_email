@@ -1,4 +1,4 @@
-# PhonyRails [![Build Status](https://travis-ci.org/hoahm/cogi_email.svg?branch=master)](https://travis-ci.org/hoahm/cogi_email) [![Coverage Status](https://coveralls.io/repos/github/hoahm/cogi_email/badge.svg)](https://coveralls.io/github/hoahm/cogi_email) [![GitHub issues](https://img.shields.io/github/issues/hoahm/cogi_email.svg)](https://github.com/hoahm/cogi_email/issues) [![Gem Version](https://badge.fury.io/rb/cogi_email.svg)](https://badge.fury.io/rb/cogi_email)
+# CogiEmail [![Build Status](https://travis-ci.org/hoahm/cogi_email.svg?branch=master)](https://travis-ci.org/hoahm/cogi_email) [![Coverage Status](https://coveralls.io/repos/github/hoahm/cogi_email/badge.svg)](https://coveralls.io/github/hoahm/cogi_email) [![GitHub issues](https://img.shields.io/github/issues/hoahm/cogi_email.svg)](https://github.com/hoahm/cogi_email/issues) [![Gem Version](https://badge.fury.io/rb/cogi_email.svg)](https://badge.fury.io/rb/cogi_email)
 
 This gem provide you library to validate, parsing and format email. Check is email is real or not.
 
